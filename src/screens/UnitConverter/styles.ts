@@ -1,0 +1,151 @@
+import { StyleSheet } from 'react-native';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import { RFValue } from 'react-native-responsive-fontsize';
+
+export const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#0A0F1C',
+    paddingTop:hp("15%")
+  },
+  content: {
+    flex: 1,
+    padding: wp('3%'),
+    paddingTop: hp('3%'),
+  },
+  header: {
+    alignItems: 'center',
+    marginBottom: hp('3%'),
+    paddingHorizontal: wp('3%'),
+  },
+  subtitle: {
+    fontSize: RFValue(18),
+    color: '#FFFFFF',
+    marginTop: hp('1%'),
+    textAlign: 'center',
+    fontWeight: '600',
+    letterSpacing: 0.5,
+    opacity: 0.9,
+  },
+  inputContainer: {
+    backgroundColor: '#1A1F2E',
+    borderRadius: wp('3%'),
+    padding: wp('3%'),
+    marginBottom: hp('2%'),
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    elevation: 5,
+    borderWidth: 1,
+    borderColor: '#2A2F3E',
+  },
+  inputRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: hp('0.8%'),
+  },
+  inputWrapper: {
+    position: 'relative',
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  resetButton: {
+    position: 'absolute',
+    right: wp('2%'),
+    padding: wp('1%'),
+  },
+  label: {
+    fontSize: RFValue(14),
+    fontWeight: '600',
+    color: '#FFFFFF',
+    letterSpacing: 0.3,
+    opacity: 0.9,
+  },
+  input: {
+    flex: 1,
+    fontSize: RFValue(16),
+    color: '#FFFFFF',
+    padding: wp('3%'),
+    paddingRight: wp('10%'),
+    backgroundColor: '#2A2F3E',
+    borderRadius: wp('2%'),
+    borderWidth: 1,
+    borderColor: '#3A3F4E',
+    fontWeight: '500',
+  },
+  pickerContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingBottom: hp('2%'),
+    gap: wp('2%'),
+  },
+  pickerWrapper: {
+    flex: 1,
+    backgroundColor: '#1A1F2E',
+    borderRadius: wp('3%'),
+    padding: wp('3%'),
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    elevation: 5,
+    borderWidth: 1,
+    borderColor: '#2A2F3E',
+  },
+  picker: {
+    height: hp('7%'),
+    color: '#FFFFFF',
+    fontSize: RFValue(14),
+    backgroundColor: 'transparent',
+  },
+  pickerItem: {
+    height: hp('5%'),
+    color: '#FFFFFF',
+    fontSize: RFValue(14),
+    backgroundColor: '#1A1F2E',
+  },
+  convertButton: {
+    backgroundColor: '#4A90E2',
+    borderRadius: wp('2%'),
+    padding: wp('3%'),
+    alignItems: 'center',
+    marginTop: hp('1.5%'),
+  },
+  convertButtonText: {
+    color: '#FFFFFF',
+    fontSize: RFValue(16),
+    fontWeight: '600',
+  },
+  errorText: {
+    color: '#FF6B6B',
+    fontSize: RFValue(12),
+    marginTop: hp('0.8%'),
+    textAlign: 'center',
+  },
+  resultContainer: {
+    backgroundColor: '#1A1F2E',
+    borderRadius: wp('3%'),
+    padding: wp('3%'),
+    marginTop: hp('2%'),
+    alignItems: 'center',
+  },
+  resultLabel: {
+    fontSize: RFValue(14),
+    color: '#FFFFFF',
+    opacity: 0.7,
+    marginBottom: hp('0.8%'),
+  },
+  resultAmount: {
+    fontSize: RFValue(20),
+    color: '#FFFFFF',
+    fontWeight: '600',
+  },
+}); 

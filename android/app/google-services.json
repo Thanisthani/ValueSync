@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "133264618532",
+    "project_id": "valuesync-1fd95",
+    "storage_bucket": "valuesync-1fd95.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:133264618532:android:92be9794043924e239d4b1",
+        "android_client_info": {
+          "package_name": "com.valuesync"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAx98jMTeWvIuh5n-sP2uJqvl6lfrH5dzM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
