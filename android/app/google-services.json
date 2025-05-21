@@ -1,21 +1,40 @@
 {
   "project_info": {
-    "project_number": "133264618532",
-    "project_id": "valuesync-1fd95",
-    "storage_bucket": "valuesync-1fd95.firebasestorage.app"
+    "project_number": "522687166910",
+    "project_id": "valuesync-21110",
+    "storage_bucket": "valuesync-21110.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:133264618532:android:92be9794043924e239d4b1",
+        "mobilesdk_app_id": "1:522687166910:android:5882aaef1288d145d361ef",
         "android_client_info": {
-          "package_name": "com.valuesync"
+          "package_name": "com.dlgn.valuesync"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAx98jMTeWvIuh5n-sP2uJqvl6lfrH5dzM"
+          "current_key": "AIzaSyDueNjEUjsLdP41-ycRGYW8_lois6hbF50"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:522687166910:android:04fa6b1136b1b8f8d361ef",
+        "android_client_info": {
+          "package_name": "com.example.newapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDueNjEUjsLdP41-ycRGYW8_lois6hbF50"
         }
       ],
       "services": {

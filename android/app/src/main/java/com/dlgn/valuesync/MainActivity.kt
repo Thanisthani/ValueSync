@@ -1,4 +1,4 @@
-package com.valuesync
+package com.dlgn.valuesync
 
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate

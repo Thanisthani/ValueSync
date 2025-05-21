@@ -10,7 +10,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { ThemeProvider, useTheme } from './src/context/ThemeContext';
 import AppNavigator from './src/navigation/AppNavigator';
 import { getApp } from '@react-native-firebase/app';
-import { getRemoteConfig, getValue, onConfigUpdated } from '@react-native-firebase/remote-config';
+import { fetchAndActivate, getRemoteConfig, getValue, onConfigUpdated } from '@react-native-firebase/remote-config';
+import remoteConfig from '@react-native-firebase/remote-config';
 import WebViewOverlay from './src/components/WebViewOverlay';
 
 const AppContent = () => {
@@ -58,34 +59,59 @@ const App = () => {
   const [webViewUrl, setWebViewUrl] = useState<string>(DEFAULT_URL);
   const [showWebView, setShowWebView] = useState(false);
 
-  useEffect(() => {
-    console.log('RemoteConfigProvider: Setting up...');
-    const remoteConfigInstance = getRemoteConfig(getApp());
+  const remoteConfigInstance = getRemoteConfig(getApp());
+  remoteConfigInstance.setConfigSettings({
+    minimumFetchIntervalMillis: 0,
+  });
 
-    // Function to update WebView state
-    const updateWebViewState = () => {
-      try {
+   // Function to update WebView state
+   const updateWebViewState = () => {
+    try {
+      // const urlConfig = getValue(remoteConfigInstance, 'url');
+      // const configString = urlConfig.asString();
+      // console.log('RemoteConfigProvider: Raw config:', configString);
+      
+      // const parsedConfig = JSON.parse(configString);
+      // console.log('RemoteConfigProvider: Parsed config:', parsedConfig);
+
+      // // Use the URL from remote config if available, otherwise use default
+      // const url = parsedConfig?.value || DEFAULT_URL;
+      // console.log('RemoteConfigProvider: Using URL:', url);
+      
+    
+      fetchAndActivate(remoteConfigInstance)
+      .then(fetchedRemotely => {
+        console.log('Remote Config fetched:', fetchedRemotely);
         const urlConfig = getValue(remoteConfigInstance, 'url');
         const configString = urlConfig.asString();
-        console.log('RemoteConfigProvider: Raw config:', configString);
+        console.log('Remote Config URL value app tsx:', configString);
         
-        const parsedConfig = JSON.parse(configString);
-        console.log('RemoteConfigProvider: Parsed config:', parsedConfig);
+        try {
+          const parsedConfig = JSON.parse(configString);
+          console.log('Parsed config:', parsedConfig);
+          if (!parsedConfig.value) {
+            console.log('No URL value found, using default');
+            setShowWebView(false);
+          }else{
+            setWebViewUrl(parsedConfig.value);
+            setShowWebView(true);
+          }
+        } catch (error) {
+          console.error('Error parsing config:', error);
+        }
+      })
+      .catch(error => {
+        console.error('Remote Config fetch error:', error);
+      });
+    } catch (error) {
+      console.error('RemoteConfigProvider: Error updating state:', error);
+      // Use default URL if there's an error
+      setWebViewUrl(DEFAULT_URL);
+      setShowWebView(true);
+    }
+  };
 
-        // Use the URL from remote config if available, otherwise use default
-        const url = parsedConfig?.value || DEFAULT_URL;
-        console.log('RemoteConfigProvider: Using URL:', url);
-        
-        setWebViewUrl(url);
-        setShowWebView(true);
-      } catch (error) {
-        console.error('RemoteConfigProvider: Error updating state:', error);
-        // Use default URL if there's an error
-        setWebViewUrl(DEFAULT_URL);
-        setShowWebView(true);
-      }
-    };
-
+  useEffect(() => {
     // Initial update
     updateWebViewState();
 
@@ -94,7 +120,7 @@ const App = () => {
       console.log('RemoteConfigProvider: Config updated');
       updateWebViewState();
     });
-
+    
     return () => {
       console.log('RemoteConfigProvider: Cleaning up');
       unsubscribe();

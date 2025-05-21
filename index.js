@@ -19,50 +19,6 @@ try {
     console.log('Firebase already initialized');
   }
 
-  // Initialize Remote Config
-  console.log('Initializing Remote Config...');
-  const remoteConfigInstance = getRemoteConfig(getApp());
-  
-  // Set minimum fetch interval to 0 for testing
-  remoteConfigInstance.setConfigSettings({
-    minimumFetchIntervalMillis: 0,
-  });
-
-  // Set default value
-  const defaultConfig = {
-    url: JSON.stringify({
-      key: 'url',
-      value: ''
-    })
-  };
-  
-  console.log('Setting default config:', defaultConfig);
-  remoteConfigInstance.setDefaults(defaultConfig);
-
-  // Fetch and activate
-  console.log('Fetching remote config...');
-  fetchAndActivate(remoteConfigInstance)
-    .then(fetchedRemotely => {
-      console.log('Remote Config fetched:', fetchedRemotely);
-      const urlConfig = getValue(remoteConfigInstance, 'url');
-      const configString = urlConfig.asString();
-      console.log('Remote Config URL value:', configString);
-      
-      try {
-        const parsedConfig = JSON.parse(configString);
-        console.log('Parsed config:', parsedConfig);
-        if (!parsedConfig.value) {
-          console.log('No URL value found, using default');
-          // Force update with default value
-          remoteConfigInstance.setDefaults(defaultConfig);
-        }
-      } catch (error) {
-        console.error('Error parsing config:', error);
-      }
-    })
-    .catch(error => {
-      console.error('Remote Config fetch error:', error);
-    });
 
   console.log('=== FIREBASE INIT END ===');
 } catch (error) {
