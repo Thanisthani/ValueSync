@@ -79,9 +79,9 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace "com.valuesync"
+    namespace "com.dlgn.valuesync"
     defaultConfig {
-        applicationId "com.valuesync"
+        applicationId "com.dlgn.valuesync"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 2
