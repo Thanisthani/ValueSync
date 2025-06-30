@@ -26,7 +26,7 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
   const [toCurrency, setToCurrency] = useState('EUR');
 
   const [convertedAmount, setConvertedAmount] = useState<number | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [nextUpdateTime, setNextUpdateTime] = useState<string | null>(null);
   const [rates, setRates] = useState<{ [key: string]: number }>({});
@@ -51,17 +51,19 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
         const data = JSON.parse(storedData);
         setRates(data.rates);
 
-        setNextUpdateTime(data.time_next_update_utc);
-        
+        setNextUpdateTime(data.time_next_update_utc);        
         if (shouldUpdateRates()) {
           fetchCurrencies();
         }
       } else {
         fetchCurrencies();
       }
+
     } catch (err) {
       console.error('Error loading stored data:', err);
       fetchCurrencies();
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -77,6 +79,7 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
           rates: { USD: 1, ...data.rates },
           time_next_update_utc: data.time_next_update_utc
         }));
+        loadStoredData()
       }
     } catch (err) {
       setError('Failed to fetch currencies');
@@ -99,7 +102,7 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
       return;
     }
 
-    setLoading(true);
+
     setError(null);
 
     try {
@@ -113,10 +116,11 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
 
       setConvertedAmount(result);
     } catch (err) {
+      console.log(err)
       setError('Failed to convert currency. Please try again.');
       setConvertedAmount(null);
     } finally {
-      setLoading(false);
+    
     }
   };
 
@@ -148,6 +152,13 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
     });
   };
 
+  if(loading) {
+    return (
+      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <ActivityIndicator size="large" color={colors.primary} />
+      </View>
+    )
+  }
   return (
     <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]}>
       <StatusBar
